@@ -11,7 +11,7 @@ if ($PSVersionTable.PSVersion.Major -ge 5) {
 } else {
     Write-Output "`nWrong PowerShell version to install AzureRM. Please visit the following link and download 5.0 or greater.`n
     https://docs.microsoft.com/en-us/powershell/scripting/setup/installing-windows-powershell?view=powershell-6#upgrading-existing-windows-powershell`n"
-    Read-Host -Prompt 'Press any key to exit'; exit
+    Read-Host -Prompt 'Press ENTER to exit'; exit
 }
 
 # Check if AzureRM module is installed already, install only if needed
@@ -111,4 +111,4 @@ if ([string]::IsNullOrWhiteSpace($choice)) {
 } else {
     Write-Output "`nMust enter either create or update. Bye-Bye.....`n"; Start-Sleep -s 5; exit
 }
-Read-Host -Prompt 'Press any key to finish and exit.'
+Read-Host -Prompt 'Press ENTER to finish and exit'
