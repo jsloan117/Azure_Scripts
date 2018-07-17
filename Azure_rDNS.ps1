@@ -6,7 +6,7 @@ version: 1.0
 #>
 
 # Check PS Version
-if ($PSVersionTable.PSVersion.Major -ge 5) {
+if ($PSVersionTable.PSVersion.Major -ge 5 -and $PSVersionTable.PSVersion.Major -lt 6) {
     Write-Output "`nWe have the correct PowerShell version proceeding.`n"
 } else {
     Write-Output "`nWrong PowerShell version to install AzureRM. Please visit the following link and download 5.0 or greater.`n
