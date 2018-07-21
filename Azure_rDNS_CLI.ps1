@@ -1,7 +1,7 @@
 <# Configures|updates rDNS in Azure
-07/20/18
+07/21/18
 Jonathan Sloan <jsloan117@gmail.com>
-version: 0.1
+version: 1.0
 #>
 
 $Shell = $Host.UI.RawUI; $Shell.WindowTitle="Azure reverse DNS Tool"
