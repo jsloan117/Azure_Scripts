@@ -7,19 +7,24 @@ version: 1.0
 
 # Check PS Version
 if ($PSVersionTable.PSVersion.Major -ge 5 -and $PSVersionTable.PSVersion.Major -lt 6) {
-    Write-Output "`nWe have the correct PowerShell version proceeding.`n"
+    Write-Output "`nWe have the correct PowerShell version proceeding.`n"; $arm = 'AzureRM'
+} elseif ($PSVersionTable.PSVersion.Major -ge 6) {
+    Write-Output "`nWe have the correct PowerShell version proceeding.`n"; $arm = 'AzureRM.NetCore'
 } else {
-    Write-Output "`nWrong PowerShell version to install AzureRM. Please visit the following link and download 5.0 or greater.`n
-    https://docs.microsoft.com/en-us/powershell/scripting/setup/installing-windows-powershell?view=powershell-6#upgrading-existing-windows-powershell`n"
+    Write-Output "`n    Wrong PowerShell version to install AzureRM or AzureRM.NetCore (Powershell >=6). Please visit the following link and download 5.0 or greater.`n
+    https://docs.microsoft.com/en-us/powershell/scripting/setup/installing-windows-powershell?view=powershell-6#upgrading-existing-windows-powershell`n`n    or`n
+    https://aka.ms/getps6-windows (Powershell >=6.0)."
     Read-Host -Prompt 'Press ENTER to exit'; exit
 }
 
+$Shell = $Host.UI.RawUI; $Shell.WindowTitle="Azure reverse DNS Tool"
+
 # Check if AzureRM module is installed already, install only if needed
-if (Get-Module -ListAvailable -Name AzureRM) {
+if (Get-Module -ListAvailable -Name $arm) {
     Write-Output "AzureRM Module already installed proceeding.`n"
 } else {
     Write-Output "Installing the AzureRM Module now...`n"
-    Install-Module -Name AzureRM -Force
+    Install-Module -Name $arm -Force
 }
 
 # Force executionpolicy to Bypass (no prompt)
@@ -28,7 +33,7 @@ Set-Executionpolicy -Scope Process -ExecutionPolicy ByPass -Force
 
 # Import module
 Write-Output "Importing AzureRM module to proceed.`n"
-Import-Module AzureRM
+Import-Module $arm
 
 # Login as your Azure Client
 $creds = Get-Credential;
