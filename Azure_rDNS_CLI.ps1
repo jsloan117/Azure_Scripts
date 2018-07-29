@@ -1,7 +1,7 @@
 <# Configures|updates rDNS in Azure
 07/21/18
 Jonathan Sloan <jsloan117@gmail.com>
-version: 1.0
+version: 1.1
 #>
 
 $Shell = $Host.UI.RawUI; $Shell.WindowTitle="Azure reverse DNS Tool"
@@ -42,10 +42,10 @@ function SetrDNS () {
     if ($x = 'True') {
         $pipam = 'Static'
     } else {
-        $pipname = 'Dynamic'
+        $pipam = 'Dynamic'
     }
 
-    if ($pipam -notmatch "Static") { # Ensure PublicIP is assigned statically - may cause a reboot of the VM
+    if ($pipam -notmatch '^Static$') { # Ensure PublicIP is assigned statically - may cause a reboot of the VM
         Write-Output "Setting Public Allocation Method to Static and proceeding with rDNS setup.`n"
         az network public-ip update -g $rg -n $pipname --dns-name $hname --allocation-method Static --reverse-fqdn "${fname}." --output table
     } else {
