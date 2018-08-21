@@ -29,7 +29,7 @@ function Check_Allocation_Method () {
   if ($rcode -match 'True') {
     Clear-Host; Write-Output "`n";
     Write-Output "Public IP is Dynamically assigned. Please change within your https://poral.azure.com account, this article should help. `n`n$ip_kb`n`n"
-    Read-Host -Prompt 'Press ENTER to exit. '
+    Read-Host -Prompt 'Press ENTER to exit '
     exit 1
   }
 }
