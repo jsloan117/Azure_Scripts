@@ -1,5 +1,7 @@
 # Azure_Scripts
 
+![License](https://img.shields.io/badge/License-GPLv3-blue.svg)
+
 **Using one of these on an Operating System not shown next to them may result in failure.**
 
 How to change your IP from Dynamic to Static: <https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-public-ip-address#view-change-settings-for-or-delete-a-public-ip-address>
