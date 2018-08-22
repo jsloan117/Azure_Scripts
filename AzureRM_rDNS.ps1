@@ -44,15 +44,15 @@ $creds = Get-Credential;
 Connect-AzureRmAccount -Credential $creds; Clear-Variable creds; Write-Output "`nMay need to press enter to continue.`n"
 
 # Get ResourceGroups
-Get-AzureRmResourceGroup | Select-Object ResourceGroupName
+(Get-AzureRmResourceGroup).ResourceGroupName
 
 # Prompt for RG
-$rg = Read-Host -Prompt 'Enter Resource Group Name'
+Write-Output "`n";$rg = Read-Host -Prompt 'Enter Resource Group Name'
 
 function Check_Allocation_Method () {
   Get-AzureRmPublicIpAddress -ResourceGroupName $rg | Select-Object Name,IpAddress
-  $Global:pipname = Read-Host -Prompt 'Enter PublicIP Name'; Write-Output "`n"
-  $pipam = Get-AzureRmPublicIpAddress -Name $pipname -ResourceGroupName $rg | Select-Object PublicIpAllocationMethod
+  $Script:pipname = Read-Host -Prompt 'Enter PublicIP Name'; Write-Output "`n"
+  $pipam = (Get-AzureRmPublicIpAddress -Name $pipname -ResourceGroupName $rg).PublicIpAllocationMethod
 
   if ($pipam -match 'Dynamic') {
     Clear-Host; Write-Output "`n";
