@@ -13,3 +13,7 @@ If you have 2FA (Two-Factor auauthentication) enabled on your Azure account do *
 - `AzureCLI_rDNS.ps1` -- Set reverse DNS using Azure-CLI 2.0 (Windows)
 
 - `AzureCLI_rDNS.sh` -- Set reverse DNS using Azure-CLI 2.0 (Linux/Mac)
+
+- `AzureRM_PC_rDNS.ps1` -- Login to client's account using Partner Center and set rDNS for them. Be sure to change the below variables.
+  - $nativeAppIdGuid = "FILL THIS IN WITH YOUR INFORMATION"
+  - $cspPartnerDomain = "example.onmicrosoft.com"
