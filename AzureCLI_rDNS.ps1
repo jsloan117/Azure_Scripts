@@ -15,7 +15,7 @@ $Shell = $Host.UI.RawUI; $Shell.WindowTitle="AzureCLI reverse DNS Tool"
 $ip_kb = 'https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-public-ip-address#view-change-settings-for-or-delete-a-public-ip-address'
 
 # Login as your Azure Client
-az login; Write-Output "`nMay need to press enter to continue.`n"
+az login; Write-Output "`nMay need to press enter to continue`n"
 
 # Get ResourceGroups
 az group list --output table
@@ -40,8 +40,8 @@ function SetrDNS () {
   Write-Output "`n"; $hname = Read-Host -Prompt 'Enter a unique name not FQDN: '
   Write-Output "`n"; $fname = Read-Host -Prompt 'Enter Reverse DNS record name: '
 
-  Write-Output "Setting up reverse DNS.`n"
-  az network public-ip update -g $rg -n $pipname --dns-name $hname --reverse-fqdn "${fname}." --output table > $null
+  Write-Output "Setting up reverse DNS...`n"
+  az network public-ip update -g $rg -n $pipname --dns-name $hname --reverse-fqdn "$fname." --output table > $null
 }
 Check_Allocation_Method
 SetrDNS

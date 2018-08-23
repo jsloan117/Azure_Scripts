@@ -43,8 +43,8 @@ SetrDNS () {
   echo ''; read -ep 'Enter a unique name not FQDN: ' hname
   echo ''; read -ep 'Enter Reverse DNS record name: ' fname
 
-  echo -e 'Setting up reverse DNS.\n'
-  az network public-ip update -g $rg -n $pipname --dns-name $hname --reverse-fqdn "${fname}." --output table > /dev/null
+  echo -e 'Setting up reverse DNS...\n'
+  az network public-ip update -g $rg -n $pipname --dns-name $hname --reverse-fqdn "$fname." --output table > /dev/null
 }
 Check_Allocation_Method
 SetrDNS

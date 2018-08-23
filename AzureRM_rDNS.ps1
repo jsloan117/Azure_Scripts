@@ -19,7 +19,7 @@ if ($PSVersionTable.PSVersion.Major -ge 5 -and $PSVersionTable.PSVersion.Major -
   Write-Output "`n    Wrong PowerShell version to install AzureRM or AzureRM.NetCore (Powershell >=6). Please visit the following link and download 5.0 or greater.`n
   https://docs.microsoft.com/en-us/powershell/scripting/setup/installing-windows-powershell?view=powershell-6#upgrading-existing-windows-powershell`n`n    or`n
   https://aka.ms/getps6-windows (Powershell >=6.0)."
-  Read-Host -Prompt 'Press ENTER to exit'; exit
+  Read-Host -Prompt 'Press ENTER to exit '; exit
 }
 
 $Shell = $Host.UI.RawUI; $Shell.WindowTitle="AzureRM reverse DNS Tool"
@@ -41,17 +41,17 @@ $ip_kb = 'https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network
 
 # Login as your Azure Client
 $creds = Get-Credential;
-Connect-AzureRmAccount -Credential $creds; Clear-Variable creds; Write-Output "`nMay need to press enter to continue.`n"
+Connect-AzureRmAccount -Credential $creds; Clear-Variable creds; Write-Output "`nMay need to press enter to continue`n"
 
 # Get ResourceGroups
 (Get-AzureRmResourceGroup).ResourceGroupName
 
 # Prompt for RG
-Write-Output "`n";$rg = Read-Host -Prompt 'Enter Resource Group Name'
+Write-Output "`n";$rg = Read-Host -Prompt 'Enter Resource Group Name: '
 
 function Check_Allocation_Method () {
   Get-AzureRmPublicIpAddress -ResourceGroupName $rg | Select-Object Name,IpAddress
-  $Script:pipname = Read-Host -Prompt 'Enter PublicIP Name'; Write-Output "`n"
+  $Script:pipname = Read-Host -Prompt 'Enter PublicIP Name: '; Write-Output "`n"
   $pipam = (Get-AzureRmPublicIpAddress -Name $pipname -ResourceGroupName $rg).PublicIpAllocationMethod
 
   if ($pipam -match 'Dynamic') {
@@ -66,10 +66,10 @@ function SetrDNS {
   $hname = Read-Host -Prompt 'Enter a unique name not FQDN: '; Write-Output "`n"
   $fname = Read-Host -Prompt 'Enter Reverse DNS record name: '; Write-Output "`n"
 
-  Write-Output "Setting up reverse DNS.`n"
+  Write-Output "Setting up reverse DNS...`n"
   $pip = Get-AzureRmPublicIpAddress -Name $pipname -ResourceGroupName $rg
-  $pip.DnsSettings = New-Object -TypeName "Microsoft.Azure.Commands.Network.Models.PSPublicIpAddressDnsSettings"
-  $pip.DnsSettings.DomainNameLabel = "$hname"
+  $pip.DnsSettings = New-Object -TypeName 'Microsoft.Azure.Commands.Network.Models.PSPublicIpAddressDnsSettings'
+  $pip.DnsSettings.DomainNameLabel = $hname
   $pip.DnsSettings.ReverseFqdn = "$fname."
   Set-AzureRmPublicIpAddress -PublicIpAddress $pip
 }
