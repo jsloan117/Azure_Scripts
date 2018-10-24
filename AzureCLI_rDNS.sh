@@ -32,7 +32,7 @@ Check_Allocation_Method () {
   az network public-ip list -g $rg --output table | grep -q Static && pipam='Static' || pipam='Dynamic'
 
   if [[ "$pipam" = 'Dynamic' ]]; then
-    clear; echo -e "\nPublic IP is Dynamically assigned. Please change within your https://poral.azure.com account, this article should help. \n\n$ip_kb\n\n"
+    clear; echo -e "\nPublic IP is Dynamically assigned. Please change within your https://portal.azure.com account, this article should help. \n\n$ip_kb\n\n"
     exit 1
   fi
 }
